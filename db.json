@@ -1,0 +1,132 @@
+{
+  "tenants": [
+    { "id": "acme", "name": "Acme Corp", "isActive": true },
+    { "id": "globex", "name": "Globex Inc", "isActive": true }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "tenantId": "acme",
+      "username": "admin",
+      "password": "admin123",
+      "fullName": "John Admin",
+      "roleId": 1,
+      "token": "fake-jwt-token-admin"
+    }
+  ],
+  "roles": [
+    { "id": 1, "tenantId": "acme", "name": "Admin" },
+    { "id": 2, "tenantId": "acme", "name": "Manager" }
+  ],
+  "permissions": [
+    { "id": 1, "roleId": 1, "resource": "orders", "action": "read" },
+    { "id": 2, "roleId": 1, "resource": "orders", "action": "create" },
+    { "id": 3, "roleId": 1, "resource": "customers", "action": "read" },
+    { "id": 4, "roleId": 2, "resource": "orders", "action": "read" }
+  ],
+  "menus": [
+    {
+      "id": 1,
+      "name": "Dashboard",
+      "url": "/dashboard",
+      "icon": "home",
+      "permission": null
+    },
+    {
+      "id": 2,
+      "name": "Customers",
+      "url": "/customers",
+      "icon": "users",
+      "permission": "customers:read"
+    },
+    {
+      "id": 3,
+      "name": "Orders",
+      "url": "/orders",
+      "icon": "shopping-cart",
+      "permission": "orders:read"
+    },
+    {
+      "id": 4,
+      "name": "Settings",
+      "url": "/settings",
+      "icon": "settings",
+      "permission": null
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "tenantId": "acme",
+      "name": "Big Corp",
+      "email": "contact@bigcorp.com",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "tenantId": "acme",
+      "name": "Small Biz",
+      "email": "info@smallbiz.com",
+      "status": "inactive"
+    }
+  ],
+  "orders": [
+    {
+      "id": 100,
+      "tenantId": "acme",
+      "customerId": 1,
+      "status": "Confirmed",
+      "amount": 199.99,
+      "currency": "USD",
+      "date": "2025-07-15"
+    }
+  ],
+  "settings": [
+    {
+      "tenantId": "acme",
+      "currency": "USD",
+      "timezone": "America/New_York",
+      "dateFormat": "MM/DD/YYYY"
+    }
+  ],
+  "files": [
+    {
+      "id": 1,
+      "tenantId": "acme",
+      "filename": "contract.pdf",
+      "url": "/files/contract.pdf",
+      "module": "orders",
+      "moduleId": 100,
+      "size": 1048576,
+      "type": "pdf"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "New Order Created",
+      "description": "Order #100 has been created",
+      "read": false,
+      "createdAt": "2025-07-17T10:00:00Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": 1,
+      "tenantId": "acme",
+      "userId": 1,
+      "action": "Login",
+      "resource": "Auth",
+      "timestamp": "2025-07-17T09:55:00Z"
+    },
+    {
+      "id": 2,
+      "tenantId": "acme",
+      "userId": 1,
+      "action": "Created",
+      "resource": "Order #100",
+      "timestamp": "2025-07-17T10:01:00Z"
+    }
+  ]
+}
