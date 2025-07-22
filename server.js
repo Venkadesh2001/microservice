@@ -1,24 +1,27 @@
-// JSON Server module
 const jsonServer = require("json-server");
+const cors = require("cors");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
-
-// Make sure to use the default middleware
 const middlewares = jsonServer.defaults();
 
-server.use(middlewares);
-// Add this before server.use(router)
+// ✅ Enable CORS for any frontend origin (customize if needed)
 server.use(
- // Add custom route here if needed
- jsonServer.rewriter({
-  "/*": "/$1",
- })
+  cors({
+    origin: "*", // Change this to your frontend URL in production!
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
 );
-server.use(router);
-// Listen to port
-server.listen(3000, () => {
- console.log("JSON Server is running");
-});
 
-// Export the Server API
+// Optional custom route rewrites
+server.use(
+  jsonServer.rewriter({
+    "/*": "/$1",
+  })
+);
+
+server.use(middlewares);
+server.use(router);
+
+// ✅ Let Vercel handle the listening — don’t use server.listen()
 module.exports = server;
